@@ -43,7 +43,18 @@ export default function Home() {
 
       if (!response.ok) {
         toast.error("Failed to insert document");
+        return;
       }
+
+      if (type === "waitlist") {
+        toast("Thank you! You have been added to our waitlist!");
+      } else {
+        toast("Thank you! We will reach out soon!");
+      }
+
+      setType("");
+      setEmail("");
+      setShowInput(false);
 
       return await response.json();
     } catch (error) {
