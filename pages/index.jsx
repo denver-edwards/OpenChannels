@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import * as emailValidator from "email-validator";
+import Header from "@/components/Header";
+import ReadyPage from "@/components/ReadyPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +13,7 @@ export default function Home() {
   const [showInput, setShowInput] = useState(false);
   const [type, setType] = useState("");
   const [email, setEmail] = useState("");
+  const [ready, setReady] = useState(true);
 
   const handleButtonClick = (type) => {
     setShowInput(true);
@@ -62,17 +65,8 @@ export default function Home() {
     }
   };
 
-  return (
-    <div>
-      <Head>
-        <title>Open Channels | Connecting Developers with Developers</title>
-        <meta
-          name="description"
-          content="A platform where developers and programming enthusiasts can directly engage with other creators to build a better product."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+  function Recruit() {
+    return (
       <main>
         <div className="min-h-screen bg-gray-100 flex justify-center items-center">
           <div className="max-w-lg px-8 py-12 bg-white shadow-md rounded-lg space-y-8">
@@ -143,6 +137,21 @@ export default function Home() {
           </div>
         </div>
       </main>
+    );
+  }
+
+  return (
+    <div>
+      <Head>
+        <title>Open Channels | Connecting Developers with Developers</title>
+        <meta
+          name="description"
+          content="A platform where developers and programming enthusiasts can directly engage with other creators to build a better product."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {ready ? <ReadyPage /> : <Recruit />}
     </div>
   );
 }
