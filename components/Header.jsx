@@ -37,17 +37,17 @@ export default function Header() {
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <Link
               href="/about"
-              className="block py-2 pr-4 pl-3 border-b md:border-0 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
+              className="block py-2 pr-2 pl-1.5 border-b md:border-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="block py-2 pr-4 pl-3 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
+              className="block py-2 pr-2 pl-1.5 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
             >
               Contact
             </Link>
-            {/**
+
             <div className="relative flex items-center">
               <Search color="White" className="translate-x-8" />
               <input
@@ -56,20 +56,18 @@ export default function Header() {
                 className="pl-10 px-3 py-2 text-gray-300 bg-gray-600 border border-gray-700 rounded-md focus:outline-none focus:border-gray-900"
               />
             </div>
-**/}
+
             <Link
               href=""
-              className="block py-2 pr-4 pl-3 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
+              className="block py-2 pr-2 pl-1.5 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
             >
               Sign in
             </Link>
             <Link
               href="/signup"
-              className="block py-2 pr-4 pl-3 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-gray-800 md:hover:text-white hover:bg-gray-700 border bg-white rounded transition-all"
+              className="block py-2 pr-2 pl-1.5 md:hover:bg-transparent rounded border rounded border-white text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
             >
-              <p className="px-2 py-1.5 hover:text-white font-semibold">
-                Sign up
-              </p>
+              Sign up
             </Link>
           </ul>
         </div>
