@@ -31,8 +31,11 @@ function Body() {
           We understand the power of collaboration in the world of programming.
           That's why we've created a space where programmers from all
           backgrounds and expertise levels can connect with one another, share
-          their experiences, and inspire innovation. Whether you're a seasoned
-          developer or just starting out, there's a place for you here.
+          their experiences, and inspire innovation.
+        </p>
+        <p className="text-left text-slate-600">
+          Whether you're a seasoned developer or just starting out, there's a
+          place for <b>you</b> here.
         </p>
       </div>
     </main>

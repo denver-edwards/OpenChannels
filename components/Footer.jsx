@@ -48,12 +48,12 @@ export default function Footer() {
               </h2>
               <ul className="text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a
+                  <Link
                     href="https://github.com/denver-edwards/OpenChannels"
                     className="hover:underline"
                   >
                     Github
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -82,17 +82,20 @@ export default function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm sm:text-center text-gray-400">
             © {year}{" "}
-            <a href="/" className="hover:underline">
+            <Link href="/" className="hover:underline">
               OpenChannels
-            </a>
+            </Link>
             . All Rights Reserved.
           </span>
 
           <div className="flex mt-4 sm:justify-center sm:mt-0">
-            <a href="#" className="text-gray-500 hover:text-white ms-5">
+            <Link
+              href="https://github.com/denver-edwards/OpenChannels"
+              className="text-gray-500 hover:text-white ms-5"
+            >
               <Github />
               <span className="sr-only">GitHub account</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

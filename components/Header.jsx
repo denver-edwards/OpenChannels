@@ -58,16 +58,10 @@ export default function Header() {
             </div>
 
             <Link
-              href=""
-              className="block py-2 pr-2 pl-1.5 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
-            >
-              Sign in
-            </Link>
-            <Link
               href="/login"
-              className="block py-2 pr-2 pl-1.5 md:hover:bg-transparent rounded border rounded border-white text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
+              className="block border border-gray-300 shadow-xl py-2 px-2 bg-gray-800 md:hover:bg-gray-100 rounded-xl text-white hover:text-gray-800"
             >
-              Sign up
+              Sign in / Sign up
             </Link>
           </ul>
         </div>
