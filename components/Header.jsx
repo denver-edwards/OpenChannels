@@ -21,7 +21,7 @@ export default function Header() {
             onClick={() => setShowMenu(!showMenu)}
           >
             <span className="sr-only">Open main menu</span>
-            <Menu size={20} toggled={showMenu} toggle={setShowMenu} />
+            <Menu size={20} />
           </button>
         </div>
 
@@ -64,7 +64,7 @@ export default function Header() {
               Sign in
             </Link>
             <Link
-              href="/signup"
+              href="/login"
               className="block py-2 pr-2 pl-1.5 md:hover:bg-transparent rounded border rounded border-white text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white"
             >
               Sign up

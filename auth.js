@@ -3,4 +3,7 @@ import GitHub from "next-auth/providers/github";
 
 export const { signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
+  pages: {
+    signIn: "/login",
+  },
 });
