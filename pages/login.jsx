@@ -14,7 +14,7 @@ export default function Login() {
     if (session != null) {
       router.push("/");
     }
-  }, []);
+  }, [router, session]);
 
   return (
     <div className="flex flex-col min-h-screen">

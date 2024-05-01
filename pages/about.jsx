@@ -29,13 +29,13 @@ function Body() {
 
         <p className="text-left py-8 text-slate-600">
           We understand the power of collaboration in the world of programming.
-          That's why we've created a space where programmers from all
+          That&apos;s why we&apos;ve created a space where programmers from all
           backgrounds and expertise levels can connect with one another, share
           their experiences, and inspire innovation.
         </p>
         <p className="text-left text-slate-600">
-          Whether you're a seasoned developer or just starting out, there's a
-          place for <b>you</b> here.
+          Whether you&apos;re a seasoned developer or just starting out,
+          there&apos;s a place for <b>you</b> here.
         </p>
       </div>
     </main>

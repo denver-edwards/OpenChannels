@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, Search } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -101,7 +102,16 @@ export default function Header() {
             }
             id="mobile-menu"
           >
-            <div className="rounded-full bg-white w-8 h-8">w</div>
+            <div className="rounded-full bg-white w-8 h-8 hover:scale-105">
+              <Image
+                src="/default_profile.png"
+                width={500}
+                height={500}
+                quality={100}
+                alt="User Profile Picture"
+                className=""
+              />
+            </div>
           </div>
         </div>
       </nav>
