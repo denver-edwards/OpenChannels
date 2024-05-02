@@ -25,12 +25,17 @@ export default function Footer() {
               </h2>
               <ul className="text-gray-400 font-medium">
                 <li className="mb-4">
-                  <Link href="/support" className="hover:underline">
+                  <Link href="/blog" className="hover:underline">
                     Blog
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/support" className="hover:underline">
+                  <Link href="/about" className="hover:underline">
+                    About
+                  </Link>
+                </li>
+                <li className="mb-4">
+                  <Link href="/contact" className="hover:underline">
                     Contact Us
                   </Link>
                 </li>

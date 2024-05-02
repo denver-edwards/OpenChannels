@@ -71,7 +71,7 @@ export default function Home() {
         <div className="min-h-screen bg-gray-100 flex justify-center items-center">
           <div className="max-w-lg px-8 py-12 bg-white shadow-md rounded-lg space-y-8">
             <h1 className="text-3xl font-semibold text-center">
-              Welcome to Open Channels
+              Welcome to OpenChannels
             </h1>
 
             <p className="text-gray-600 text-center">
@@ -143,7 +143,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Open Channels | Connecting Developers with Developers</title>
+        <title>OpenChannels | Connecting Developers with Developers</title>
         <meta
           name="description"
           content="A platform where developers and programming enthusiasts can directly engage with other creators to build a better product."
