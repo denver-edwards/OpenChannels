@@ -3,14 +3,16 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, Plus, Search } from "lucide-react";
 import { useSession } from "next-auth/react";
+import NewPostModal from "@/components/NewPostModal";
 
 export default function Header() {
   const session = useSession();
   const [showMenu, setShowMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   if (session == null) {
     return (
-      <nav className="border border-gray-700 px-2 sm:px-4 py-5 rounded bg-gray-800 shadow-xl">
+      <nav className="border border-gray-700 px-2 sm:px-4 py-5 bg-gray-800 shadow-xl">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <Link href="/" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap text-gray-400 hover:text-gray-300">
@@ -74,57 +76,63 @@ export default function Header() {
     );
   } else {
     return (
-      <nav className="border border-gray-700 px-2 sm:px-4 py-5 rounded bg-gray-800 shadow-xl">
-        <div className="container flex flex-wrap justify-between items-center mx-auto">
-          <Link href="/" className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap text-gray-400 hover:text-gray-300">
-              OpenChannels
-            </span>
-          </Link>
-
-          <div className="flex items-center">
-            <button
-              type="button"
-              className="inline-flex items-center p-2 ml-3 text-sm rounded-lg focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600 md:hidden"
-              onClick={() => setShowMenu(!showMenu)}
-            >
-              <span className="sr-only">Open main menu</span>
-              <Menu size={20} />
-            </button>
-          </div>
-
-          <div
-            className={
-              "w-full md:flex md:w-auto" +
-              (!showMenu
-                ? " hidden"
-                : " transition-transform duration-500 ease-linear")
-            }
-            id="mobile-menu"
-          >
-            <div
-              className="mr-4 rounded-lg border border-gray-500 text-gray-500 flex items-center justify-center w-8 h-8 group cursor-pointer hover:bg-gray-700 transition-all"
-              title="New project"
-            >
-              <Plus size={"1.1em"} className="group-hover:text-white" />
-            </div>
-            <Link
-              className="rounded-full bg-white w-8 h-8 hover:scale-110 cursor-pointer"
-              href="/profile"
-              title="Profile"
-            >
-              <Image
-                src="/default_profile.png"
-                width={500}
-                height={500}
-                quality={100}
-                alt="User Profile Picture"
-                className=""
-              />
+      <>
+        <nav className="z-50 border border-gray-700 px-2 sm:px-4 py-5 bg-gray-800 shadow-xl">
+          <div className="container flex flex-wrap justify-between items-center mx-auto">
+            <Link href="/" className="flex items-center">
+              <span className="self-center text-xl font-semibold whitespace-nowrap text-gray-400 hover:text-gray-300">
+                OpenChannels
+              </span>
             </Link>
+
+            <div className="flex items-center">
+              <button
+                type="button"
+                className="inline-flex items-center p-2 ml-3 text-sm rounded-lg focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600 md:hidden"
+                onClick={() => setShowMenu(!showMenu)}
+              >
+                <span className="sr-only">Open main menu</span>
+                <Menu size={20} />
+              </button>
+            </div>
+
+            <div
+              className={
+                "w-full md:flex md:w-auto" +
+                (!showMenu
+                  ? " hidden"
+                  : " transition-transform duration-500 ease-linear")
+              }
+              id="mobile-menu"
+            >
+              <div
+                className="mr-4 rounded-lg border border-gray-500 text-gray-500 flex items-center justify-center w-8 h-8 group cursor-pointer hover:bg-gray-700 transition-all"
+                title="Create new project..."
+                onClick={() => setShowModal(!showModal)}
+              >
+                <Plus size={"1.1em"} className="group-hover:text-white" />
+              </div>
+              <Link
+                className="rounded-full bg-white w-8 h-8 hover:scale-110 cursor-pointer"
+                href="/profile"
+                title="Profile"
+              >
+                <Image
+                  src="/default_profile.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="User Profile Picture"
+                  className=""
+                />
+              </Link>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+        {showModal && (
+          <NewPostModal showModal={showModal} setShowModal={setShowModal} />
+        )}
+      </>
     );
   }
 }
