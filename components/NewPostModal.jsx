@@ -147,7 +147,7 @@ export default function NewPostModal({ showModal, setShowModal }) {
                 }`}
                 onClick={submitPost}
               >
-                {!isLoading ? (
+                {isLoading ? (
                   <Loader className="animate-spin" />
                 ) : (
                   "Share with the world!"
