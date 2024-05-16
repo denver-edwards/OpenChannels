@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, Loader } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function NewPostModal({ showModal, setShowModal }) {
   const [isMounted, setIsMounted] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    category: "",
+    link: "",
+    description: "",
+  });
 
   useEffect(() => {
     if (showModal) {
@@ -19,8 +27,22 @@ export default function NewPostModal({ showModal, setShowModal }) {
     }
   }, [setShowModal, showModal, isMounted, hidden]);
 
-  const submitPost = () => {
-    setHidden(true);
+  const submitPost = async () => {
+    try {
+      setIsLoading(true);
+
+      // console.log(data);
+      await fetch("/post-new-post", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      setHidden(true);
+      toast.success("Your project is live.", { position: "top-center" });
+    } catch (e) {
+      toast.error("An error has occurred.", { position: "top-center" });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -61,9 +83,10 @@ export default function NewPostModal({ showModal, setShowModal }) {
                     type="text"
                     id="project-name"
                     placeholder="Enter your project name"
-                    value=""
-                    onChange=""
-                    className="border border-2 border-gray-200 rounded-lg px-2 outline-none w-2/3"
+                    value={data["name"]}
+                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                    className={`border border-2 border-gray-200 rounded-lg px-2 outline-none w-2/3 ${isLoading}`}
+                    disabled={isLoading}
                   />
                 </div>
 
@@ -73,7 +96,9 @@ export default function NewPostModal({ showModal, setShowModal }) {
                   </label>
                   <select
                     id="category"
-                    onChange={(e) => console.log(e.target.value)}
+                    onChange={(e) =>
+                      setData({ ...data, category: e.target.value })
+                    }
                     className="border border-2 border-gray-200 rounded-lg px-2 outline-none w-2/3"
                   >
                     <option value="">Select a category</option>
@@ -91,32 +116,42 @@ export default function NewPostModal({ showModal, setShowModal }) {
                     type="text"
                     id="github-link"
                     placeholder="https://github.com/denver-edwards/OpenChannels"
-                    value=""
-                    onChange=""
+                    value={data["link"]}
+                    onChange={(e) => setData({ ...data, link: e.target.value })}
                     className="border border-2 border-gray-200 rounded-lg px-2 outline-none w-2/3"
+                    disabled={isLoading}
                   />
                 </div>
               </div>
 
               <div className="flex items-center mt-4">
                 <label htmlFor="summary" className="mr-2 w-1/3">
-                  Short Summary
+                  Short Description
                 </label>
                 <input
                   type="text"
-                  id="summary"
+                  id="description"
                   placeholder="Give a simple explanation of your project"
-                  value=""
-                  onChange=""
+                  value={data["description"]}
+                  onChange={(e) =>
+                    setData({ ...data, description: e.target.value })
+                  }
                   className="border border-2 border-gray-200 rounded-lg px-2 outline-none w-2/3"
+                  disabled={isLoading}
                 />
               </div>
 
               <button
-                className="flex transition-all shadow-xl hover:shadow-md bg-blue-600 hover:bg-blue-800 rounded-xl mt-6 px-4 py-2 text-white text-center mx-auto"
+                className={`flex transition-all shadow-xl hover:shadow-md rounded-xl mt-6 px-4 py-2 text-white text-center mx-auto ${
+                  isLoading ? "bg-gray-600" : "bg-blue-600 hover:bg-blue-800"
+                }`}
                 onClick={submitPost}
               >
-                Share with the world!
+                {!isLoading ? (
+                  <Loader className="animate-spin" />
+                ) : (
+                  "Share with the world!"
+                )}
               </button>
             </div>
           </div>

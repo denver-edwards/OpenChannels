@@ -23,7 +23,7 @@ export default function App({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <SessionProvider session={session}>
-        <ToastContainer />
+        <ToastContainer autoClose={2000} pauseOnFocusLoss={false} limit={2} />
         <Component {...pageProps} />
       </SessionProvider>
     </>
