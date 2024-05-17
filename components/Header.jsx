@@ -10,7 +10,7 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  if (session == null) {
+  if (session == null || session.status === "unauthenticated") {
     return (
       <nav className="border border-gray-700 px-2 sm:px-4 py-5 bg-gray-800 shadow-xl">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -130,7 +130,11 @@ export default function Header() {
           </div>
         </nav>
         {showModal && (
-          <NewPostModal showModal={showModal} setShowModal={setShowModal} />
+          <NewPostModal
+            session={session}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
         )}
       </>
     );

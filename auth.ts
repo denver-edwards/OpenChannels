@@ -8,5 +8,5 @@ export const { signIn, signOut, auth, handlers } = NextAuth({
   pages: {
     signIn: "/login",
   },
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise, { databaseName: "User" }),
 });

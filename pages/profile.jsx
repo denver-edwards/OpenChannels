@@ -1,22 +1,42 @@
 import Header from "@/components/Header";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import Checkbox from "@/components/Checkbox";
 
 export default function Settings() {
+  const session = useSession();
+  const router = useRouter();
+  const [userData, setUserData] = useState({ name: "", email: "", image: "" });
+
+  // console.log(session.data.user);
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/");
+      return;
+    } else {
+      // console.log(session.data);
+      const userData = session?.data?.user ?? null;
+
+      setUserData(userData);
+      // console.log(userData["user"]);
+    }
+  }, [router, session]);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Head>
         <title>Your Profile | OpenChannels</title>
       </Head>
       <Header />
-      <Body />
+      <Body userData={userData} setUserData={setUserData} />
     </div>
   );
 }
 
-function Body() {
+function Body({ userData, setUserData }) {
   const [selectedInterests, setSelectedInterests] = useState([]);
 
   function handleCheckboxChange(interest, isChecked) {
@@ -38,6 +58,12 @@ function Body() {
       <div className="w-3/4">
         <div className="font-medium text-2xl text-gray-700 pb-4 pl-8 w-3/4">
           Public Profile
+          <button
+            className="bg-red-400 hover:bg-red-700 text-white text-sm px-2 py-1 ml-10 rounded-3xl"
+            onClick={signOut}
+          >
+            Sign Out
+          </button>
         </div>
 
         <div className="flex items-center mt-4 text-gray-700 px-10">
@@ -48,8 +74,8 @@ function Body() {
             type="text"
             id="name"
             placeholder="Enter your name..."
-            value=""
-            onChange=""
+            value={userData["name"]}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className="border border-1.5 border-gray-300 rounded-md px-2 py-1 outline-none w-4/5"
           />
         </div>
@@ -62,8 +88,8 @@ function Body() {
             type="text"
             id="username"
             placeholder="Enter a username..."
-            value=""
-            onChange=""
+            value={userData["name"]}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className="border border-1.5 border-gray-300 rounded-md px-2 py-1 outline-none w-4/5"
           />
         </div>
@@ -76,8 +102,8 @@ function Body() {
             type="text"
             id="headline"
             placeholder="Ex. Love making open-source libraries"
-            value=""
-            onChange=""
+            value={userData["name"]}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className="border border-1.5 border-gray-300 rounded-md px-2 py-1 outline-none w-4/5"
           />
         </div>
