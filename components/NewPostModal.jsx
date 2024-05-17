@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { X, Loader } from "lucide-react";
 import { toast } from "react-toastify";
 
-export default function NewPostModal({ showModal, setShowModal }) {
+export default function NewPostModal({ session, showModal, setShowModal }) {
   const [isMounted, setIsMounted] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
+    creatorEmail: "",
     name: "",
     category: "",
     link: "",
@@ -31,13 +32,21 @@ export default function NewPostModal({ showModal, setShowModal }) {
     try {
       setIsLoading(true);
 
+      setData({ ...data, creatorEmail: session.data.user.email });
       // console.log(data);
-      await fetch("/post-new-post", {
+      const res = await fetch("/api/post-new-post", {
         method: "POST",
         body: JSON.stringify(data),
       });
-      setHidden(true);
-      toast.success("Your project is live.", { position: "top-center" });
+
+      if (res.status >= "200" && res.status < "300") {
+        setHidden(true);
+        toast.success("Your project is live.", { position: "top-center" });
+      } else {
+        toast.error(`Something went wrong. Error: ${res.status}`, {
+          position: "top-center",
+        });
+      }
     } catch (e) {
       toast.error("An error has occurred.", { position: "top-center" });
     } finally {
@@ -146,6 +155,7 @@ export default function NewPostModal({ showModal, setShowModal }) {
                   isLoading ? "bg-gray-600" : "bg-blue-600 hover:bg-blue-800"
                 }`}
                 onClick={submitPost}
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <Loader className="animate-spin" />

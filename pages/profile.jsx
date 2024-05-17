@@ -13,15 +13,18 @@ export default function Settings() {
 
   // console.log(session.data.user);
   useEffect(() => {
-    if (session.status === "unauthenticated") {
+    if (session.status === "loading") {
+      return;
+    }
+
+    if (session.status === "unauthenticated" || session == null) {
       router.push("/");
       return;
     } else {
       // console.log(session.data);
       const userData = session?.data?.user ?? null;
 
-      setUserData(userData);
-      // console.log(userData["user"]);
+      setUserData(session.data);
     }
   }, [router, session]);
 
@@ -38,7 +41,7 @@ export default function Settings() {
 
 function Body({ userData, setUserData }) {
   const [selectedInterests, setSelectedInterests] = useState([]);
-
+  console.log(userData);
   function handleCheckboxChange(interest, isChecked) {
     if (isChecked) {
       setSelectedInterests((prevInterests) => [...prevInterests, interest]);
@@ -88,8 +91,6 @@ function Body({ userData, setUserData }) {
             type="text"
             id="username"
             placeholder="Enter a username..."
-            value={userData["name"]}
-            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className="border border-1.5 border-gray-300 rounded-md px-2 py-1 outline-none w-4/5"
           />
         </div>
@@ -102,8 +103,6 @@ function Body({ userData, setUserData }) {
             type="text"
             id="headline"
             placeholder="Ex. Love making open-source libraries"
-            value={userData["name"]}
-            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className="border border-1.5 border-gray-300 rounded-md px-2 py-1 outline-none w-4/5"
           />
         </div>
