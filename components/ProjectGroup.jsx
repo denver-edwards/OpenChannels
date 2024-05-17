@@ -17,11 +17,12 @@ export default function ProjectGroup({ heading, projects }) {
       {projects.map((item, index) => (
         <div
           id=""
+          key={index}
           className="my-6 flex rounded-2xl hover:from-gray-100 hover:bg-gradient-to-l hover:delay-[3000ms] transition"
         >
           <div className="bg-gray-700 rounded-xl w-14 h-14"></div>
 
-          <Link className="flex flex-col px-8" href="/">
+          <Link className="flex flex-col px-8" href={item.link}>
             <p className="py-1 text-gray-800 hover:text-gray-400 cursor-pointer">
               <span className="w-1/2 ">{item.name} - </span>
               <span className="w-1/2 text-sm">{item.description}</span>
