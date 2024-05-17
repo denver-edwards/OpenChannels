@@ -18,12 +18,13 @@ function Body() {
       name: "This",
       description: "This is a test",
       category: "Game",
-      link: "/",
+      slug: "/",
       totalLikes: 0,
     },
   ];
+
   return (
-    <main>
+    <main className="min-h-screen">
       <ProjectGroup heading="Showcase" projects={data} />
       <ProjectGroup heading="Latest Projects" projects={data} />
     </main>

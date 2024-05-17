@@ -22,7 +22,7 @@ export default function ProjectGroup({ heading, projects }) {
         >
           <div className="bg-gray-700 rounded-xl w-14 h-14"></div>
 
-          <Link className="flex flex-col px-8" href={item.link}>
+          <Link className="flex flex-col px-8" href={item.slug}>
             <p className="py-1 text-gray-800 hover:text-gray-400 cursor-pointer">
               <span className="w-1/2 ">{item.name} - </span>
               <span className="w-1/2 text-sm">{item.description}</span>

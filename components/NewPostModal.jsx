@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X, Loader } from "lucide-react";
+import slugify from "slugify";
 import { toast } from "react-toastify";
 
 export default function NewPostModal({ session, showModal, setShowModal }) {
@@ -11,6 +12,7 @@ export default function NewPostModal({ session, showModal, setShowModal }) {
     name: "",
     category: "",
     link: "",
+    slug: "",
     description: "",
   });
 
@@ -29,30 +31,42 @@ export default function NewPostModal({ session, showModal, setShowModal }) {
   }, [setShowModal, showModal, isMounted, hidden]);
 
   const submitPost = async () => {
+    // alert(slugify(data.name, { lower: true, strict: true }));
+
     try {
       setIsLoading(true);
 
-      setData({ ...data, creatorEmail: session.data.user.email });
-      // console.log(data);
-      const res = await fetch("/api/post-new-post", {
-        method: "POST",
-        body: JSON.stringify(data),
+      setData({
+        ...data,
+        slug: generateSlug(data.name),
+        creatorEmail: session.data.user.email,
       });
-
-      if (res.status >= "200" && res.status < "300") {
-        setHidden(true);
-        toast.success("Your project is live.", { position: "top-center" });
-      } else {
-        toast.error(`Something went wrong. Error: ${res.status}`, {
-          position: "top-center",
-        });
-      }
+      // console.log(data);
+      // const res = await fetch("/api/post-new-post", {
+      //   method: "POST",
+      //   body: JSON.stringify(data),
+      // });
+      //
+      // if (res.status >= "200" && res.status < "300") {
+      //   setHidden(true);
+      //   toast.success("Your project is live.", { position: "top-center" });
+      // } else {
+      //   toast.error(`Something went wrong. Error: ${res.status}`, {
+      //     position: "top-center",
+      //   });
+      // }
     } catch (e) {
       toast.error("An error has occurred.", { position: "top-center" });
     } finally {
       setIsLoading(false);
     }
   };
+
+  function generateSlug(projName) {
+    // check if slug exists
+    alert(projName);
+    return slugify(projName, { lower: true, strict: true });
+  }
 
   return (
     <>
