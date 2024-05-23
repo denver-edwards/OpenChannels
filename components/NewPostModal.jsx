@@ -14,6 +14,7 @@ export default function NewPostModal({ session, showModal, setShowModal }) {
     link: "",
     slug: "",
     description: "",
+    totalLikes: 0,
   });
 
   useEffect(() => {
@@ -31,8 +32,6 @@ export default function NewPostModal({ session, showModal, setShowModal }) {
   }, [setShowModal, showModal, isMounted, hidden]);
 
   const submitPost = async () => {
-    // alert(slugify(data.name, { lower: true, strict: true }));
-
     try {
       setIsLoading(true);
 
@@ -40,21 +39,25 @@ export default function NewPostModal({ session, showModal, setShowModal }) {
         ...data,
         slug: generateSlug(data.name),
         creatorEmail: session.data.user.email,
+        submitDate: new Date(),
       });
       // console.log(data);
-      // const res = await fetch("/api/post-new-post", {
-      //   method: "POST",
-      //   body: JSON.stringify(data),
-      // });
-      //
-      // if (res.status >= "200" && res.status < "300") {
-      //   setHidden(true);
-      //   toast.success("Your project is live.", { position: "top-center" });
-      // } else {
-      //   toast.error(`Something went wrong. Error: ${res.status}`, {
-      //     position: "top-center",
-      //   });
-      // }
+      const res = await fetch("/api/post-new-post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (res.status >= "200" && res.status < "300") {
+        setHidden(true);
+        toast.success("Your project is live.", { position: "top-center" });
+      } else {
+        toast.error(`Something went wrong. Error: ${res.status}`, {
+          position: "top-center",
+        });
+      }
     } catch (e) {
       toast.error("An error has occurred.", { position: "top-center" });
     } finally {
