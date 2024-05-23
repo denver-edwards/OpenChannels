@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -79,14 +80,14 @@ function Body({ data }) {
         <p>
           <strong>Description:</strong> {data.description}
         </p>
-        <p>
-          <strong>Link:</strong> <a href={data.link}>{data.link}</a>
-        </p>
+        <Link
+          className="bg-blue-400 hover:bg-blue-600 text-white rounded px-2 py-2"
+          href={data.link}
+        >
+          Github Link
+        </Link>
         <p>
           <strong>Total Likes:</strong> {data.totalLikes}
-        </p>
-        <p>
-          <strong>Creator Email:</strong> {data.creatorEmail}
         </p>
       </div>
     </main>
