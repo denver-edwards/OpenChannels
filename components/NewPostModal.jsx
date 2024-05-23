@@ -67,7 +67,6 @@ export default function NewPostModal({ session, showModal, setShowModal }) {
 
   function generateSlug(projName) {
     // check if slug exists
-    alert(projName);
     return slugify(projName, { lower: true, strict: true });
   }
 

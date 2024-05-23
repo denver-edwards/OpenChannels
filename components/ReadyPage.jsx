@@ -56,7 +56,7 @@ function Body() {
 
   return (
     <main className="min-h-screen">
-      <ProjectGroup heading="Showcase" projects={data} />
+      {/*<ProjectGroup heading="Showcase" projects={data} /> */}
       <ProjectGroup heading="Latest Projects" projects={latestPosts} />
     </main>
   );
